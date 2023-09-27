@@ -19,7 +19,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/dagbag/interview.git
+   git clone https://github.com/dag-bag/madverse-pokedex.git
    ```
 
 Navigate to the project directory:
