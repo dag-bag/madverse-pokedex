@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+
+
+model Pokemon {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  sprite    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  types     Type[]    // Define a relation to Type model
+  
+  @@index([name])
+}
+
+model Type {
+  id      Int     @id @default(autoincrement())
+  name    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pokemon Pokemon[] // Define a relation to Pokemon model
+  
+  @@index([name])
+}
