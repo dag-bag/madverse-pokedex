@@ -4,6 +4,7 @@ import Search from "./Search";
 import { api } from "~/utils/api";
 import FormResult from "./FormResult";
 import { useDebouncedValue } from "@mantine/hooks";
+import Load from "./skeleton";
 export default function Form() {
   const [pokemonName, setPokemonName] = useState("Bulbasaur");
   const [debounced] = useDebouncedValue(pokemonName, 500);
@@ -18,7 +19,7 @@ export default function Form() {
   return (
     <Box sx={{ marginBottom: 2 }}>
       <Typography variant="h5" sx={{ textAlign: "center", my: 5 }}>
-        Pokémon Generation
+        PokemonRow
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 5 }}>
         <Search

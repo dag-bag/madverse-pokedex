@@ -8,20 +8,26 @@ type Props = {
 
 const PokemonRow: React.FC<Props> = ({ pokemon }) => {
   return (
-    <TableRow>
-      <TableCell>{pokemon?.id}</TableCell>
-      <TableCell>{pokemon?.name}</TableCell>
-      <TableCell>
+    <TableRow
+      key={pokemon?.id}
+      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+    >
+      <TableCell component="th" scope="row">
+        {pokemon?.id}
+      </TableCell>
+      <TableCell align="right">{pokemon?.name}</TableCell>
+      <TableCell align="right">
         {pokemon?.types.map((type) => (
           <Chip
             key={type.name}
             label={type.name}
-            avatar={<Avatar>{type.name.charAt(0)}</Avatar>}
             variant="outlined"
+            sx={{ marginRight: "5px" }}
+            avatar={<Avatar>{type.name.charAt(0)}</Avatar>}
           />
         ))}
       </TableCell>
-      <TableCell>
+      <TableCell align="right">
         <img
           src={pokemon?.sprite}
           alt={pokemon?.name}
