@@ -9,6 +9,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
+import Load from "../skeleton";
 
 type PokedexTableProps = {
   selectedType: string[] | [];
@@ -36,7 +37,7 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ selectedType }) => {
   return (
     <>
       {arrayLoading ? (
-        <div>Loading...</div>
+        <Load />
       ) : (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
