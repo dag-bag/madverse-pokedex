@@ -11,7 +11,9 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import CircularProgress from "@mui/material/CircularProgress";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { api } from "~/utils/api";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -37,6 +39,7 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
   selectedType,
   selectType,
 }) => {
+  // We can use Static Data or api
   const names = [
     "Grass",
     "Fire",
@@ -49,6 +52,8 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
     "Rock",
     "Normal",
   ];
+  // Api Version
+  const { data, isLoading, error } = api.types.getPokemonTypes.useQuery();
 
   const theme = useTheme();
 
@@ -74,15 +79,24 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, selectedType, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
+          {isLoading ? (
+            <CircularProgress
+              style={{
+                margin: "auto",
+                display: "block",
+              }}
+            />
+          ) : (
+            data?.map(({ name, id }) => (
+              <MenuItem
+                key={id}
+                value={name}
+                style={getStyles(name, selectedType, theme)}
+              >
+                {name}
+              </MenuItem>
+            ))
+          )}
         </Select>
       </FormControl>
     </div>
