@@ -39,20 +39,6 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
   selectedType,
   selectType,
 }) => {
-  // We can use Static Data or api
-  const names = [
-    "Grass",
-    "Fire",
-    "Water",
-    "Electric",
-    "Fairy",
-    "Fighting",
-    "Ghost",
-    "Ground",
-    "Rock",
-    "Normal",
-  ];
-  // Api Version
   const { data, isLoading, error } = api.types.getPokemonTypes.useQuery();
 
   const theme = useTheme();
@@ -78,6 +64,7 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
+          disabled={isLoading}
         >
           {isLoading ? (
             <CircularProgress
@@ -86,6 +73,8 @@ const PokemonTypeSelection: React.FC<PokemonTypeSelectionProps> = ({
                 display: "block",
               }}
             />
+          ) : error ? (
+            <MenuItem disabled>Error loading types</MenuItem>
           ) : (
             data?.map(({ name, id }) => (
               <MenuItem

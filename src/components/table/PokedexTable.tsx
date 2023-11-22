@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
 import Load from "../skeleton";
 import TableLayout from "./Container";
+import { usePokemonArray } from "~/hooks/usePokemonArray";
 
 type PokedexTableProps = {
   selectedType: string[] | [];
@@ -29,11 +30,7 @@ const PokedexTable: React.FC<PokedexTableProps> = ({ selectedType }) => {
     "Eevee",
     "Snorlax",
   ];
-  const { data, isLoading: arrayLoading } =
-    api.pokemon.getPokemonArray.useQuery({
-      array: array,
-      filter: selectedType,
-    });
+  const { data, arrayLoading } = usePokemonArray({ array, selectedType });
 
   return (
     <>
